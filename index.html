@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حرفِ صفر | Ali Nasir</title>
+    
+    <!-- Google Fonts: Urdu Nastaliq and English Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+                /* Extra: Make images and iframes fluid by default */
+                img, iframe {
+                    max-width: 100%;
+                    height: auto;
+                    display: block;
+                }
+
+        /* ========================================
+           CSS VARIABLES & ROOT STYLES
+        ======================================== */
+        :root {
+            --bg-primary: #F5E9DA;
+            --bg-secondary: #FAF3EA;
+            --text-primary: #2C1810;
+            --text-secondary: #6B4423;
+            --accent-gold: #C9A961;
+            --accent-dark: #8B6F47;
+            --accent-copper: #B87333;
+            
+            --font-urdu: 'Noto Nastaliq Urdu', serif;
+            --font-english: 'Playfair Display', serif;
+            --font-body-en: 'Cormorant Garamond', serif;
+            
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-soft: 0 4px 24px rgba(44, 24, 16, 0.08);
+            --shadow-medium: 0 8px 32px rgba(44, 24, 16, 0.12);
+        }
+        
+        /* ========================================
+           RESET & BASE STYLES
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: var(--font-urdu);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(44, 24, 16, 0.01) 2px,
+                    rgba(44, 24, 16, 0.01) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Grain texture */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* ========================================
+           TYPOGRAPHY
+        ======================================== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .urdu-text {
+            font-family: var(--font-urdu);
+            direction: rtl;
+        }
+        
+        .english-text {
+            font-family: var(--font-english);
+            direction: ltr;
+        }
+        
+        /* ========================================
+           ORNAMENTAL DIVIDERS
+        ======================================== */
+        .ornament {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin: 3rem 0;
+            opacity: 0.7;
+        }
+        
+        .ornament-svg {
+            width: 80px;
+            height: 20px;
+            margin: 2rem auto;
+            opacity: 0.6;
+        }
+        
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, #FAF3EA 0%, #F5E9DA 100%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 111, 71, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1.2s var(--transition-smooth);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .book-cover {
+            width: 300px;
+            max-width: 85vw;
+            margin: 0 auto 2.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-medium);
+            transition: transform 0.6s var(--transition-smooth);
+            animation: floatIn 1.5s var(--transition-smooth);
+        }
+        
+        .book-cover:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+            animation: fadeInUp 1.4s var(--transition-smooth) 0.2s backwards;
+        }
+        
+        .hero-author {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            animation: fadeInUp 1.4s var(--transition-smooth) 0.4s backwards;
+        }
+        
+        .hero-tagline {
+            font-family: var(--font-body-en);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1.4s var(--transition-smooth) 0.6s backwards;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-copper));
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.4s var(--transition-smooth);
+            box-shadow: 0 4px 16px rgba(201, 169, 97, 0.3);
+            animation: fadeInUp 1.4s var(--transition-smooth) 0.8s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(201, 169, 97, 0.4);
+        }
+        
+        /* ========================================
+           SECTION STYLES
+        ======================================== */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            line-height: 2;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+        
+        /* ========================================
+           ABOUT SECTION
+        ======================================== */
+        #about {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 5rem 3rem;
+            margin: 3rem auto;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .about-text {
+            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+            line-height: 2.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-highlight {
+            font-family: var(--font-urdu);
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            color: var(--accent-dark);
+            text-align: center;
+            margin-top: 2rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+        
+        /* ========================================
+           POETRY CARDS
+        ======================================== */
+        .poetry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .poetry-card {
+            background: var(--bg-secondary);
+            padding: 3rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.5s var(--transition-smooth);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poetry-card::before {
+            content: '✦';
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+        }
+        
+        .poetry-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-gold);
+        }
+        
+        .poetry-text {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            line-height: 2.3;
+            color: var(--text-primary);
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .poetry-line {
+            margin: 0.8rem 0;
+        }
+        
+        /* ========================================
+           PDF VIEWER SECTION
+        ======================================== */
+        #read {
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+            padding: 5rem 2rem;
+        }
+        
+        .pdf-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+            border: 3px solid var(--accent-gold);
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+        
+        .download-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.4s var(--transition-smooth);
+            box-shadow: 0 4px 16px rgba(44, 24, 16, 0.2);
+        }
+        
+        .download-button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(44, 24, 16, 0.3);
+        }
+        
+        /* ========================================
+           AUTHOR SECTION
+        ======================================== */
+        #author {
+            text-align: center;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 5rem 3rem;
+            margin: 3rem auto;
+        }
+        
+        .author-bio {
+            font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+            max-width: 700px;
+            margin: 2rem auto;
+            line-height: 2;
+            color: var(--text-secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-copper));
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s var(--transition-smooth);
+            font-family: var(--font-body-en);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
+        }
+        
+        /* ========================================
+           FOOTER
+        ======================================== */
+        footer {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-quote {
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .footer-divider {
+            width: 80px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 2rem auto;
+            opacity: 0.6;
+        }
+        
+        .footer-copyright {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-family: var(--font-body-en);
+        }
+        
+        /* ========================================
+           ANIMATIONS
+        ======================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* Fade in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--transition-smooth), 
+                        transform 0.8s var(--transition-smooth);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ========================================
+           RESPONSIVE DESIGN
+        ======================================== */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1.5rem;
+            }
+            
+            #about, #author {
+                padding: 3rem 2rem;
+            }
+            
+            .poetry-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero {
+                min-height: 90vh;
+            }
+            
+            .pdf-viewer {
+                height: 500px;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .book-cover {
+                width: 250px;
+            }
+            
+            .pdf-viewer {
+                height: 400px;
+            }
+            
+            .cta-button, .download-button, .social-link {
+                font-size: 1rem;
+                padding: 0.8rem 1.8rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .section-content, .about-text, .about-highlight, .poetry-line, .author-bio {
+                font-size: 1rem;
+            }
+            .poetry-card {
+                padding: 1rem;
+            }
+            .pdf-container {
+                padding: 0;
+            }
+            .hero {
+                padding: 1rem;
+            }
+            .footer-quote {
+                font-size: 1rem;
+            }
+            .download-section {
+                text-align: center;
+            }
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Tablet landscape and large phones */
+        @media (min-width: 481px) and (max-width: 900px) {
+            .hero {
+                min-height: 70vh;
+                padding: 2rem 1rem;
+            }
+            .book-cover {
+                width: 200px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .poetry-card {
+                padding: 1.2rem;
+            }
+        }
+
+        /* Landscape orientation tweaks */
+        @media (orientation: landscape) and (max-width: 900px) {
+            .hero {
+                min-height: 60vh;
+            }
+            .pdf-viewer {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ========================================
+         HERO SECTION
+    ======================================== -->
+    <section class="hero">
+        <div class="hero-content">
+              <!-- Book Cover Image -->
+              <img src="cover.png" 
+                  alt="حرفِ صفر Book Cover" 
+                  class="book-cover"
+                  id="bookCover">
+            
+            <!-- Title & Author -->
+            <h1 class="hero-title urdu-text">حرفِ صفر</h1>
+            <p class="hero-author urdu-text">علی ناصر | Ali Nasir</p>
+            
+            <!-- Tagline -->
+            <p class="hero-tagline english-text">
+                "Between silence and ink, a story was written."
+            </p>
+            
+            <!-- Call to Action -->
+            <a href="#read" class="cta-button urdu-text">کتاب پڑھیں</a>
+        </div>
+    </section>
+    
+    <!-- Ornamental Divider -->
+    <div class="ornament">✦ ── ✦ ── ✦</div>
+    
+    <!-- ========================================
+         ABOUT THE BOOK SECTION
+    ======================================== -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title urdu-text">کتاب کے بارے میں</h2>
+        
+        <div class="section-content urdu-text">
+            <p class="about-text">
+                "حرفِ صفر" ایک شاعری کا مجموعہ ہے جو 2022 سے 2023 کے درمیان لکھا گیا۔ یہ کتاب محبت، خاموشی، اور خود شناسی کے موضوعات کو اپنے اندر سموئے ہوئے ہے۔ ہر شعر ایک کہانی ہے، ہر لفظ ایک احساس کی عکاسی۔
+            </p>
+            
+            <p class="about-text">
+                اس مجموعے میں زندگی کے وہ لمحات قید ہیں جو الفاظ کی محتاجی میں گم ہو جاتے ہیں، لیکن دل میں ہمیشہ کے لیے رہ جاتے ہیں۔
+            </p>
+            
+            <p class="about-highlight">
+            ابھی بہت کچھ کہنا باقی ہے، بہت کچھ لکھنا باقی ہے۔
+            </p>
+        </div>
+    </section>
+    
+    <!-- Ornamental Divider -->
+    <div class="ornament">✦ ── ✦ ── ✦</div>
+    
+    <!-- ========================================
+         SELECTED VERSES SECTION
+    ======================================== -->
+    <section id="verses" class="fade-in">
+        <h2 class="section-title urdu-text">منتخب اشعار</h2>
+        
+        <div class="poetry-grid">
+            <!-- Poetry Card 1 -->
+            <div class="poetry-card">
+                <div class="poetry-text urdu-text">
+                    <p class="poetry-line">بڑی مدتوں کے بعد میں بس</p>
+                    <p class="poetry-line">جیتتا ہوں جا رہا ہوں</p>
+                    <p class="poetry-line">سوچتا ہوں ایک بار پھر تیرے عشق
+میں ہار کر دیکھوں
+</p>
+                </div>
+            </div>
+            
+            <!-- Poetry Card 2 -->
+            <div class="poetry-card">
+                <div class="poetry-text urdu-text">
+                    <p class="poetry-line">ذکر نماز کا ہو رہا تھا، میں پچھلی قضا کر آیا</p>
+                    <p class="poetry-line">جینا تو جہاں کا ہو رہا تھا، میں آخرت تباہ کر آیا</p>
+                </div>
+            </div>
+            
+            <!-- Poetry Card 3 -->
+            <div class="poetry-card">
+                <div class="poetry-text urdu-text">
+                    <p class="poetry-line">تیرے نام پر صفحے کیا بھرنے چھوڑے</p>
+                    <p class="poetry-line">تو نے اپنا قلم ہی مجھ سے چھین لیا</p>
+                </div>
+            </div>
+            
+            <!-- Poetry Card 4 -->
+            <div class="poetry-card">
+                <div class="poetry-text urdu-text">
+                    <p class="poetry-line">پہلے اُس کا جلد آنا بھی تاخیر سا لگتا تھا</p>
+                    <p class="poetry-line">اب اُس کا مجھے بلانا بھی تقدیم سا لگتا ہے</p>
+                </div>
+            </div>
+            
+            <!-- Poetry Card 5 -->
+            <div class="poetry-card">
+                <div class="poetry-text urdu-text">
+                    <p class="poetry-line">ہم ان کی آنکھوں کا خمار دیکھیں</p>
+                    <p class="poetry-line">اپنی نظریں موڑ لیں یا مڑ کر بار بار دیکھیں</p>
+                </div>
+            </div>
+            
+            <!-- Poetry Card 6 -->
+            <div class="poetry-card">
+                <div class="poetry-text urdu-text">
+                    <p class="poetry-line">تجھے بھلانا اتنا مشکل نہیں ہے لیکن</p>
+                    <p class="poetry-line">مسئلہ یہ ہے کہ تیری یاد آتی رہے گی</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Ornamental Divider -->
+    <div class="ornament">✦ ── ✦ ── ✦</div>
+    
+    <!-- ========================================
+         READ/DOWNLOAD SECTION
+    ======================================== -->
+    <section id="read" class="fade-in">
+        <h2 class="section-title urdu-text">کتاب پڑھیں</h2>
+        
+        <!-- PDF Viewer Container -->
+        <div class="pdf-container">
+            <iframe src="firsttry.pdf#toolbar=0&navpanes=0&scrollbar=0"
+                    class="pdf-viewer"
+                    id="pdfViewer"
+                    frameborder="0">
+            </iframe>
+        </div>
+        
+        <!-- Download Section -->
+        <div class="download-section">
+            <a href="firsttry.pdf" 
+               download="harf-e-sifr-ali-nasir.pdf"
+               class="download-button urdu-text">
+                مکمل کتاب ڈاؤن لوڈ کریں (PDF)
+            </a>
+        </div>
+    </section>
+    
+    <!-- Ornamental Divider -->
+    <div class="ornament">✦ ── ✦ ── ✦</div>
+    
+    <!-- ========================================
+         AUTHOR SECTION
+    ======================================== -->
+    <section id="author" class="fade-in">
+        <h2 class="section-title urdu-text">مصنف کے بارے میں</h2>
+        
+        <div class="author-bio urdu-text">
+            <p>
+میں خود کو شاعر نہیں کہتا، بس ایک ایسا شخص ہوں جسے کبھی کبھی الفاظ خود بنا لیتے ہیں۔ میرے دادا کے پردادا ایک مشہور پنجابی شاعر تھے، شاید وہی رگِ شاعری مجھ تک بھی آ گئی ہے۔ میں نظم و قافیہ کے اصول نہیں جانتا، مگر کبھی دل کچھ کہنا چاہے تو شعر بن جاتا ہے            </p>
+        </div>
+        
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/_ali_.nasir?igsh=MThzYXF2emQ2N3l2YQ==" class="social-link" target="_blank">
+                📷 Instagram
+            </a>
+            <a href="https://www.linkedin.com/in/ali-nasir-a92aaa27a/" class="social-link" target="_blank">
+                💼 LinkedIn
+            </a>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+    <footer>
+        <p class="footer-quote urdu-text">
+            ناصرؔ خاموش ہوا، مگر کہانی باقی ہے۔
+        </p>
+        
+        <div class="footer-divider"></div>
+        
+        <p class="footer-copyright english-text">
+            © 2026 Ali Nasir. All rights reserved.
+        </p>
+    </footer>
+    
+    <!-- ========================================
+         JAVASCRIPT FOR ANIMATIONS & INTERACTIONS
+    ======================================== -->
+    <script>
+        // Fade-in on scroll animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Optional: Replace placeholder book cover with actual uploaded image
+        // Uncomment and modify the path if you upload a book cover image
+        /*
+        const bookCoverImg = document.getElementById('bookCover');
+        bookCoverImg.src = 'path/to/your/book-cover.jpg';
+        */
+        
+        // Optional: Handle PDF viewer fallback for browsers that don't support embed
+        const pdfViewer = document.getElementById('pdfViewer');
+        
+        // Check if PDF is loaded successfully
+        pdfViewer.addEventListener('error', function() {
+            const container = pdfViewer.parentElement;
+            container.innerHTML = `
+                <div style="padding: 3rem; text-align: center;">
+                    <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;" class="urdu-text">
+                        آپ کا براؤزر PDF دیکھنے کی سہولت فراہم نہیں کرتا۔
+                    </p>
+                    <a href="/mnt/user-data/uploads/firsttry.pdf" 
+                       download 
+                       class="download-button urdu-text">
+                        یہاں کلک کر کے ڈاؤن لوڈ کریں
+                    </a>
+                </div>
+            `;
+        });
+        
+        // Parallax effect for hero section (optional enhancement)
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+            }
+        });
+    </script>
+    
+</body>
+</html>
